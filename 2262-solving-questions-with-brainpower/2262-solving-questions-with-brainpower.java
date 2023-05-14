@@ -1,20 +1,15 @@
 class Solution {
+    long include(int[][] questions,int question,long[] memo){
+        if(question < 0 || question > questions.length-1) return 0;
+        if(memo[question] != -1) return memo[question];
+        memo[question] = Math.max( questions[question][0] + 
+                                   include(questions,question+1+questions[question][1],memo),
+                                   include(questions,question+1,memo));
+        return memo[question];
+    }
     public long mostPoints(int[][] questions) {
-        int n = questions.length;
-        long[] dp = new long[n];
-        dp[n - 1] = questions[n - 1][0];
-        
-        for (int i = n - 2; i >= 0; --i) {
-            dp[i] = questions[i][0];
-            int skip = questions[i][1];
-            if (i + skip + 1 < n) {
-                dp[i] += dp[i + skip + 1];
-            }
-            
-            // dp[i] = max(solve it, skip it)
-            dp[i] = Math.max(dp[i], dp[i + 1]);
-        }
-        
-        return dp[0];
+        long[] memo = new long[questions.length+1];
+        Arrays.fill(memo,-1);
+        return include(questions,0,memo);
     }
 }
