@@ -5,8 +5,8 @@ class Solution {
         if(length>high) return 0;
         if(memo[length] != -1) return memo[length];
         if(length>=low) count=1;
-        count += counting(length+zero,memo) + counting(length+one,memo);
-        count %= mod;memo[length] = count;
+          count += counting(length+zero,memo) + counting(length+one,memo);
+        memo[length] = count%mod;
         return memo[length];
     }
     public int countGoodStrings(int low, int high, int zero, int one) {
