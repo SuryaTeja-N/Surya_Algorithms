@@ -1,28 +1,17 @@
 class Solution {
+    private int low,high,zero,one;int mod = 1000000007;
+    int counting(int length,int[] memo){
+        int count=0;
+        if(length>high) return 0;
+        if(memo[length] != -1) return memo[length];
+        if(length>=low) count=1;
+        count += counting(length+zero,memo) + counting(length+one,memo);
+        count %= mod;memo[length] = count;
+        return memo[length];
+    }
     public int countGoodStrings(int low, int high, int zero, int one) {
-        // Use dp[i] to record to number of good strings of length i.
-        int[] dp = new int[high + 1];
-        dp[0] = 1;
-        int mod = 1_000_000_007;
-        
-        // Iterate over each length `end`.
-        for (int end = 1; end <= high; ++end) {
-            // check if the current string can be made by append zero `0`s or one `1`s.
-            if (end >= zero) {
-                dp[end] += dp[end - zero];
-            }
-            if (end >= one) {
-                dp[end] += dp[end - one];
-            }
-            dp[end] %= mod;
-        }
-        
-        // Add up the number of strings with each valid length [low ~ high].
-        int answer = 0;
-        for (int i = low; i <= high; ++i) {
-            answer += dp[i];
-            answer %= mod;
-        }
-        return answer;
+        this.low=low;this.high=high;this.zero=zero;this.one=one;
+        int[] memo = new int[high+1]; Arrays.fill(memo,-1);
+        return counting(0,memo);
     }
 }
