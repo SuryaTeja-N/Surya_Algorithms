@@ -1,2 +1,2 @@
 # Surya_DSA
-Collection of LeetCode questions to ace the coding interview! - Created using [LeetHub v2](https://github.com/arunbhardwaj/LeetHub-2.0)
+This repo is to store my work on different algorithms to solve respective coding challenges. If you find any error or efficient algorithm, do let me know 👍
