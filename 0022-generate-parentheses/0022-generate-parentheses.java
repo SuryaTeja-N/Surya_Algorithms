@@ -1,34 +1,26 @@
 class Solution {
-    private boolean is_valid(String st){
-        int left_count=0;
-        for(char i : st.toCharArray()){
-            if(i == '(') left_count++;
-             else left_count--;
-            if(left_count <0) return false; //careful... its important
+    //constraints are less in number, so we can use backtracking
+    private void backtrack(List<String> ans, StringBuilder curr, int left, int right,int n){
+        //base case
+        if(curr.length() == 2*n){
+            ans.add(curr.toString()); return;
         }
-        return (left_count == 0);
+
+        if(left < n ){
+            curr.append("("); //test
+            backtrack(ans,curr,left+1,right,n); //recurse
+            curr.deleteCharAt(curr.length()-1); //back
+        }
+
+        if(left > right){
+            curr.append(")");
+            backtrack(ans,curr,left,right+1,n);
+            curr.deleteCharAt(curr.length()-1);
+        }
     }
     public List<String> generateParenthesis(int n) {
-       //this is brute force, kind of similar to BFS
-        List<String> ans = new ArrayList<>();
-
-        //we have use the queue to make the different strings
-        Queue<String> que = new LinkedList<>(Arrays.asList("")); //with this, we will initialized all string in the queue with empty strings
-
-        while(!que.isEmpty()){
-
-            String curr = que.poll();
-
-            //base case
-            //if length of string beacame 2*n, we have got one answer
-            if(curr.length() == 2*n){
-                if(is_valid(curr)){ //we need to check if that ans is valid or not
-                    ans.add(curr);
-                }
-                continue;
-            }
-            que.add(curr + "(") ;  que.add(curr + ")") ;
-        }
-        return ans;
+       List<String> ans = new ArrayList<>();
+       backtrack(ans, new StringBuilder(), 0, 0, n);
+       return ans;
     }
 }
