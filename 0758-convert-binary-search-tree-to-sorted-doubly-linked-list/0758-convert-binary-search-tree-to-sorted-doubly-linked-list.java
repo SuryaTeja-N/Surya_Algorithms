@@ -32,6 +32,7 @@ class Solution {
            last.right = curr;
            curr.left = last;
         }else{
+            //if previous value is nothing, lets keep its as first value
             first = curr;
         }
         // apart from just looking each node, we need to do linkings, so lets keep track with last pointer
