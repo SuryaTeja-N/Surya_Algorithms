@@ -43,5 +43,16 @@ class Solution {
             area = Math.max(area, currheight*currwidth);
         }
         return area;
+
+        /*The code uses a deque (double-ended queue) data structure to store the indices of the bars that are in ascending order of height. The deque is implemented using a linked list, which allows adding and removing elements from both ends in constant time.
+
+The code starts by pushing -1 onto the deque, which serves as a sentinel value to mark the end of the deque. Then, it iterates over the heights array from left to right, and performs the following steps for each bar:
+
+While the top element of the deque is not -1 and the height of the bar at that index is greater than or equal to the height of the current bar, pop the top element from the deque. This means that the bar at that index has a right boundary at the current index and a left boundary at the next element on the deque. The area of the rectangle formed by this bar is then calculated by multiplying its height with its width, which is given by (i - stack.peek() + 1) - 2. The +1 is to include both boundaries, and the -2 is to exclude them. The area is then compared with the maximum area found so far and updated if necessary.
+Push the current index onto the deque, since it is smaller than or equal to the previous bar on the deque.
+
+After iterating over all the bars, there may be some remaining indices on the deque that have not been popped yet. These are the bars that have no smaller bar on their right. To find their areas, we pop them one by one from the deque and calculate their areas using a similar formula as before, but with a different right boundary. The right boundary is now given by len, which is the length of the heights array. The area is then given by (len - stack.peek() + 1) - 2. The area is then compared with the maximum area found so far and updated if necessary.
+
+The code returns the maximum area at the end.*/
     }
 }
