@@ -17,7 +17,7 @@ class Solution {
 
         //lets start the loop
         for(int i=0; i<nums.length; ++i){ //see we need index for visited array
-            if(!visited[i] && (i==0 || (nums[i-1] != nums[i]) || visited[i-1])){ //if we still not visited the number
+            if(!visited[i] && (i==0 || (nums[i] != nums[i-1]) || visited[i-1])){ //if we still not visited the number and it is not not equal to previous number.
                curr.add(nums[i]); //push
                //now we are using number, so update visited array
                visited[i] = true;
