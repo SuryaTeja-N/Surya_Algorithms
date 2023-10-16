@@ -1,9 +1,9 @@
 class Solution {
-    private String s1,s2;private Integer memo[][];
+    private String s1,s2;private int memo[][];
     private int recurse(int p1, int p2){
        if (p1 == s1.length() || p2 == s2.length()) return 0;
        //check if we already claculated this
-       if(memo[p1][p2] != null) return memo[p1][p2];
+       if(memo[p1][p2] != -1) return memo[p1][p2];
 
        int choice1 = recurse(p1+1,p2); //exclude this value
        //so second choice shoul be to include that  value
@@ -20,8 +20,8 @@ class Solution {
        return memo[p1][p2];
     }
     public int longestCommonSubsequence(String text1, String text2) {
-        memo = new Integer[text1.length()+1][text2.length()+1];
-        //for(Integer[] i : memo) Arrays.fill(i,-1);
+        memo = new int[text1.length()+1][text2.length()+1];
+        for(int[] i : memo) Arrays.fill(i,-1);
         s1 = text1;s2 = text2;
         return recurse(0,0);
     }
