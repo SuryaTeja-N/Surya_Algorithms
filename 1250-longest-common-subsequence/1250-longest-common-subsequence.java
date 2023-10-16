@@ -1,9 +1,10 @@
 class Solution {
     private String s1,s2;private Integer memo[][];
     private int recurse(int p1, int p2){
-        if (p1 == s1.length() || p2 == s2.length()) return 0;
+       if (p1 == s1.length() || p2 == s2.length()) return 0;
        //check if we already claculated this
        if(memo[p1][p2] != null) return memo[p1][p2];
+
        int choice1 = recurse(p1+1,p2); //exclude this value
        //so second choice shoul be to include that  value
        //if its there we need to look for its match in 2nd String
