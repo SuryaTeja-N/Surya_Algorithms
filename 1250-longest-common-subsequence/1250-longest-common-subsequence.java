@@ -31,7 +31,7 @@ class Solution {
         for(int[] i : memo) Arrays.fill(i,-1);
         s1 = text1;s2 = text2;
         //return lcs(0,0);
-        //lets deal with bottom up approach,
+        //lets deal with bottom up approach,(backward induction)
         int dp[][] = new int[text1.length()+1][text2.length()+1];
         for(int row= text1.length()-1; row>=0; row--){
             for(int col=text2.length()-1; col >=0; col--){
