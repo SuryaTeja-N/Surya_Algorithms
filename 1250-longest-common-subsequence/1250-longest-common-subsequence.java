@@ -32,16 +32,30 @@ class Solution {
         s1 = text1;s2 = text2;
         //return lcs(0,0);
         //lets deal with bottom up approach,(backward induction)
-        int dp[][] = new int[text1.length()+1][text2.length()+1];
+        // int dp[][] = new int[text1.length()+1][text2.length()+1];
+        // for(int row= text1.length()-1; row>=0; row--){
+        //     for(int col=text2.length()-1; col >=0; col--){
+        //         if(text1.charAt(row) == text2.charAt(col)){
+        //           dp[row][col] = 1+ dp[row+1][col+1];
+        //         }else{
+        //           dp[row][col] = Math.max(dp[row][col+1],dp[row+1][col]);
+        //         }
+        //     }
+        // }
+        // return dp[0][0];
+        //we can improve space complexity by using only two arrays instead of 2d array
+        int curr[] = new int[text2.length()+1];
+        int[] prev = new int[text2.length() + 1];
         for(int row= text1.length()-1; row>=0; row--){
-            for(int col=text2.length()-1; col >=0; col--){
-                if(text1.charAt(row) == text2.charAt(col)){
-                  dp[row][col] = 1+ dp[row+1][col+1];
-                }else{
-                  dp[row][col] = Math.max(dp[row][col+1],dp[row+1][col]);
-                }
-            }
+            //int prev[] = new int[text2.length()+1];
+           for(int col=text2.length()-1; col >=0; col--){
+               if(text1.charAt(row) == text2.charAt(col)) curr[col] = 1+prev[col+1];
+                else curr[col] = Math.max(prev[col],curr[col+1]);
+           }
+           int[] tmp = prev;
+           prev = curr;
+           curr = tmp;
         }
-        return dp[0][0];
+        return prev[0];
     }
 }
