@@ -44,17 +44,29 @@ class Solution {
         // }
         // return dp[0][0];
         //we can improve space complexity by using only two arrays instead of 2d array
-        int curr[] = new int[text2.length()+1];
+        // int curr[] = new int[text2.length()+1];
+        // int[] prev = new int[text2.length() + 1];
+        // for(int row= text1.length()-1; row>=0; row--){
+        //     //int prev[] = new int[text2.length()+1];
+        //    for(int col=text2.length()-1; col >=0; col--){
+        //        if(text1.charAt(row) == text2.charAt(col)) curr[col] = 1+prev[col+1];
+        //         else curr[col] = Math.max(prev[col],curr[col+1]);
+        //    }
+        //    int[] tmp = prev;
+        //    prev = curr;
+        //    curr = tmp;
+        // }
+        // return prev[0];
+
+        //int curr[] = new int[text2.length()+1];
         int[] prev = new int[text2.length() + 1];
         for(int row= text1.length()-1; row>=0; row--){
-            //int prev[] = new int[text2.length()+1];
+           int curr[] = new int[text2.length()+1]; //create array for each row
            for(int col=text2.length()-1; col >=0; col--){
                if(text1.charAt(row) == text2.charAt(col)) curr[col] = 1+prev[col+1];
                 else curr[col] = Math.max(prev[col],curr[col+1]);
            }
-           int[] tmp = prev;
            prev = curr;
-           curr = tmp;
         }
         return prev[0];
     }
