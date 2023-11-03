@@ -7,33 +7,41 @@
 class Solution:
     def findMode(self, root: Optional[TreeNode]) -> List[int]:
         
-        #lets make dfs traversal function to visit every node
-        def dfs(node : TreeNode, track : defaultdict): #in in-order
+        # in previous submission, we have already tried in naive dfs, but now we will use moris inorder traversal to make constant space complexity
 
-            #base case:
-            if not node:
-                return #stop
-            
-            #as this is in-order,
-            #insert left child 
-            dfs(node.left, track)
-            # get and increment the node counter value
-            track[node.val] += 1
-            #insert right child
-            dfs(node.right, track)
+        #moris traversal
+        max_freq = 0; node_freq = 0; node_val = 0; ans = []
+        curr = root
+        while curr:
 
-        # we need a hashmap (dictonary in python) to track freq of nodes
-        track = defaultdict(int)
-        #do the dfs now
-        dfs( root, track)
-        #as we got the freqs, we need to find mode (max freq)
-        maxi = max(track.values())
+            if curr.left : #so left subtree is there, we can findout its rightmost node(friend) to connect to current node
+               friend = curr.left
+               while friend.right:
+                   friend = friend.right
+               
+               #connect
+               friend.right = curr
 
-        #as per asked, we need to return list of node values with this max freq
-        ans = []
+               #now, we made the imaginary link for curr, now we need to move to next curr 
+               left = curr.left
+               curr.left = None # so that we dont visit in this way
+               curr = left
 
-        for i in track.keys():
-            if track[i] == maxi:
-                ans.append(i)
+            else:
+                num = curr.val 
+                if num == node_val: # we are doing inorder moris traversal, so its sorted numbers, same node value things comes one by one, we are taking advantage of it
+                    node_freq += 1
+                else:
+                    node_freq = 1  #its new node value
+                    node_val = num #for comparing next node value frequency
+
+                if node_freq > max_freq:
+                    ans = []
+                    max_freq = node_freq
+
+                if node_freq == max_freq:
+                    ans.append(num)
+
+                curr = curr.right
         
         return ans
