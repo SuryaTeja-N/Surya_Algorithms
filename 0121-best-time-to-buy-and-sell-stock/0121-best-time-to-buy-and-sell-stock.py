@@ -14,15 +14,15 @@ class Solution:
 
         # if you observe carefully, its similar to maximum subarray problem, and we can use kadane's algorithm
         
-        sol = prices[0]
         mini = float('inf')
-        maxi = float('-inf')
+        maxi = 0
         for i in range(len(prices)):
             if (mini > prices[i]):
                 mini = prices[i]
-            if (maxi < prices[i]-mini):
+            elif (maxi < prices[i]-mini): # if current price is reducing the profit, neglect it, if it is increasing, then update the profit.
                 maxi = prices[i]-mini
         return maxi
 
 
+            
             
