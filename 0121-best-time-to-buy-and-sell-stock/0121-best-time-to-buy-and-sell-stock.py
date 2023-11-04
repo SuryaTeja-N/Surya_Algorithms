@@ -24,9 +24,9 @@ class Solution:
         # return max_profit
 
 
-      # as similar to other " best time to buy and sell stock problems", we can use state meachine approach
+      # as similar to other " best time to buy and sell stock problems", we can use finite state meachine approach
 
-        empty = 0
+        empty = 0 #curr_profit
         onebuy = onesell = -inf
 
         for price in prices:
@@ -34,5 +34,5 @@ class Solution:
             onebuy = max(empty - price, onebuy)
             onesell = max(onebuy + price, onesell)
 
-        return max(empty, onesell)
+        return onesell
             
