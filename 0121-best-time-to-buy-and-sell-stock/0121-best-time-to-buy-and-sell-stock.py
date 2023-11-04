@@ -12,17 +12,27 @@ class Solution:
 
         '''
 
-        # if you observe carefully, its similar to maximum subarray problem, and we can use kadane's algorithm
+        # # if you observe carefully, its similar to maximum subarray problem, and we can use kadane's algorithm
         
-        mini = float('inf')
-        maxi = 0
-        for i in range(len(prices)):
-            if (mini > prices[i]):
-                mini = prices[i]
-            elif (maxi < prices[i]-mini): # if current price is reducing the profit, neglect it, if it is increasing, then update the profit.
-                maxi = prices[i]-mini
-        return maxi
+        # mini = float('inf')
+        # max_profit = 0
+        # for price in prices:
+        #     if (mini > price):
+        #         mini = price
+        #     elif (max_profit - mini < price): # if current price is reducing the profit, neglect it, if it is increasing, then update the profit.
+        #         max_profit = price-mini
+        # return max_profit
 
 
-            
+      # as similar to other " best time to buy and sell stock problems", we can use state meachine approach
+
+        empty = 0
+        onebuy = onesell = -inf
+
+        for price in prices:
+
+            onebuy = max(empty - price, onebuy)
+            onesell = max(onebuy + price, onesell)
+
+        return max(empty, onesell)
             
