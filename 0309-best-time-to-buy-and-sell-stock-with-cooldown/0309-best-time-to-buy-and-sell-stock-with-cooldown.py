@@ -14,4 +14,4 @@ class Solution:
             
             sold = max(sold, buy_held + price)
 
-        return max(sold, reset)
+        return sold
