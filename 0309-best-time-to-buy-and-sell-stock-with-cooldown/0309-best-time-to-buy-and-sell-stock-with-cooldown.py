@@ -7,10 +7,11 @@ class Solution:
         sold, buy_held, reset = -inf, -inf, 0
 
         for price in prices:
+
             buy_held = max(buy_held, reset - price)
-            pre_sold = sold
-            sold = buy_held + price
+
+            reset = max(reset, sold)
             
-            reset = max(reset, pre_sold)
+            sold = max(sold, buy_held + price)
 
         return max(sold, reset)
