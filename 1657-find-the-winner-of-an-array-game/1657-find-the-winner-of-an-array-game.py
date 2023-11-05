@@ -2,27 +2,25 @@ from collections import deque
 
 class Solution:
     def getWinner(self, arr: List[int], k: int) -> int:
+
+        maxi = max(arr)
         
-        if k >= len(arr) : return max(arr)
+        if k >= len(arr) : return maxi
 
-        que = deque(arr[1 : ]) ; curr = arr[0] ; win=0
-        
-        while que:
+        curr = arr[0] ; win=0
 
-           oppo = que.popleft()
-           
-           if curr > oppo:
+        for val in range(1, len(arr)):
 
-               que.append(oppo) ; win += 1
+            oppo = arr[val]
+
+            if curr > oppo:
+
+                win += 1
             
-           else:
+            else:
 
-               que.append(curr)
-
-               curr = oppo
-
-               win =1
+                win =1; curr = oppo
             
-           if win == k: return curr
+            if win == k or curr == maxi: return curr
 
            
