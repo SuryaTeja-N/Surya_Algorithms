@@ -4,13 +4,13 @@ class Solution:
 
         # here " held " state represent both holding and buying states
 
-        sold, held, reset = -inf, -inf, 0
+        sold, buy_held, reset = -inf, -inf, 0
 
         for price in prices:
-            
+            buy_held = max(buy_held, reset - price)
             pre_sold = sold
-            sold = held + price
-            held = max(held, reset - price)
+            sold = buy_held + price
+            
             reset = max(reset, pre_sold)
 
         return max(sold, reset)
