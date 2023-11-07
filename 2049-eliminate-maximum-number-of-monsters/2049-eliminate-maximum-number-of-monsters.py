@@ -1,17 +1,15 @@
+# O(n) time & space
 class Solution:
     def eliminateMaximum(self, dist: List[int], speed: List[int]) -> int:
-        leni = len(dist); monster_heap = []
+        # get time to deadlines dict
+        n = len(dist)
+        deadlines = [min(ceil(d / s), n) for d, s in zip(dist, speed)]
+        time_to_deadlines = Counter(deadlines)
 
-        for i in range(leni):
-            monster_heap.append(dist[i] / speed[i])
-
-        heapq.heapify(monster_heap)
-        
-        kill=0
-
-        while monster_heap:
-            if heapq.heappop(monster_heap) <= kill: break
-            kill += 1
-        
-        return kill
-
+        # at each timestep, monsters > t means you lose
+        cnt = 0
+        for t in range(1, n + 1):
+            monsters = time_to_deadlines.get(t, 0)
+            if cnt + monsters <= t: cnt += monsters
+            else: return t
+        return cnt
