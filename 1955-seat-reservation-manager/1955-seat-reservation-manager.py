@@ -3,18 +3,24 @@ from sortedcontainers import SortedSet
 class SeatManager:
 
     def __init__(self, n: int):
-        self.seats = SortedSet(range(1,n+1))
+        self.starter = 1
+        #self.seats = SortedSet()
+        self.seats = []
 
 
     def reserve(self) -> int:
-        #seat_number = heapq.heappop(self.seats) # takeout that unreserved seat
-        #return seat_number
-        seat_number = self.seats.pop(0)
-        return seat_number
+        if self.seats:  # if unreserved seats are there left to the starter
+           #return self.seats.pop(0)
+           return heapq.heappop(self.seats)
+
+        res = self.starter
+        self.starter += 1
+        return res
 
     def unreserve(self, seatNumber: int) -> None:
-        #heapq.heappush(self.seats, seatNumber)
-        self.seats.add(seatNumber)
+        #self.seats.add(seatNumber)
+        heapq.heappush(self.seats, seatNumber)
+       
 
 
 # Your SeatManager object will be instantiated and called as such:
