@@ -1,15 +1,24 @@
-# O(n) time & space
 class Solution:
     def eliminateMaximum(self, dist: List[int], speed: List[int]) -> int:
-        # get time to deadlines dict
-        n = len(dist)
-        deadlines = [min(ceil(d / s), n) for d, s in zip(dist, speed)]
-        time_to_deadlines = Counter(deadlines)
+        n=len(dist)
+        monsters_t=[0]*(n+1)
 
-        # at each timestep, monsters > t means you lose
-        cnt = 0
-        for t in range(1, n + 1):
-            monsters = time_to_deadlines.get(t, 0)
-            if cnt + monsters <= t: cnt += monsters
-            else: return t
-        return cnt
+        for i in range(n):
+            # the following is ceil function (inbuit ceil in python is slow)
+            #t=(dist[i]+speed[i]-1)//speed[i] 
+            t = math.ceil(dist[i] / speed[i])
+            if t>n: 
+                t=n
+            monsters_t[t]+=1
+        
+        shot=1
+        monsters=0
+        while shot<=n:
+            monsters+=monsters_t[shot-1]
+            if shot<=monsters: 
+                break
+            shot+=1
+        shot-=1
+        return shot
+        
+        
