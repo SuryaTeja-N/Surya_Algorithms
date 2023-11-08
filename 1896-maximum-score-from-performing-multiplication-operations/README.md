@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations/">1896. Maximum Score from Performing Multiplication Operations</a></h2><h3>Hard</h3><hr><p>You are given two <strong>0-indexed</strong> integer arrays <code>nums</code> and <code>multipliers</code><strong> </strong>of size <code>n</code> and <code>m</code> respectively, where <code>n &gt;= m</code>.</p>
+<h2><a href="https://leetcode.com/problems/maximum-score-from-performing-multiplication-operations">1896. Maximum Score from Performing Multiplication Operations</a></h2><h3>Hard</h3><hr><p>You are given two <strong>0-indexed</strong> integer arrays <code>nums</code> and <code>multipliers</code><strong> </strong>of size <code>n</code> and <code>m</code> respectively, where <code>n &gt;= m</code>.</p>
 
 <p>You begin with a score of <code>0</code>. You want to perform <strong>exactly</strong> <code>m</code> operations. On the <code>i<sup>th</sup></code> operation (<strong>0-indexed</strong>) you will:</p>
 
